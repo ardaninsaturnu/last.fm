@@ -34,18 +34,18 @@ export default function Home() {
   console.log( artistsData )
   
   return (
-    <>
-      { artistsData?.artist.map( ( artist, index ) => {
-        return loading ?
-          <Loading/> :
-          <ArtistCard
-            key={index}
-            artistName={artist.name}
-            image={artist.image[2]['#text'] }
-            listeners={artist.listeners}
-            playCount={artist.playcount}
-          />;
-      }) }
-    </>
+      <div className="w-11/12 mx-auto flex flex-wrap gap-5 justify-center px-10">
+        { artistsData?.artist.map( ( artist, index ) => {
+          return loading ?
+            <Loading/> :
+            <ArtistCard
+              key={index}
+              artistName={artist.name}
+              image={artist.image[2]['#text'] }
+              listeners={artist.listeners}
+              playCount={artist.playcount}
+            />;
+        }) }
+      </div>
   )
 }
