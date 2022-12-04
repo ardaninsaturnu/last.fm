@@ -6,8 +6,8 @@ const ArtistCard = ({ listeners = 0, playCount = 0, image = 'https://static-medi
         className={`
         flex
         ${ theme === 'dark' ? 'text-purple-300' : theme === 'light' ? 'text-purple-700' : '' }
-        border-1
-        border-gray-700
+        border
+        border-purple-500
         rounded-lg
         ${ theme === 'dark' ? 'bg-gray-900' : theme === 'light' ? 'bg-gray-200' : '' }
         w-80
@@ -19,15 +19,15 @@ const ArtistCard = ({ listeners = 0, playCount = 0, image = 'https://static-medi
         </div>
         <div className="ml-5 flex-1">
           <div>
-            artist
-            <hr className={`h-1 ${ theme === 'dark' ? 'border-purple-300' : theme === 'light' ? 'border-purple-700' : '' }`}/>
-            <div className="text-2xl">{ artistName }</div>
+            <span className="text-purple-400">artist</span>
+            <hr className={`h-1 ${ theme === 'dark' ? 'border-purple-500' : theme === 'light' ? 'border-purple-700' : '' }`}/>
+            <div className="text-2xl text-purple-700">{ artistName }</div>
           </div>
-          <div className="text-sm">
-            listeners : <span className="text-lg">{ listeners }</span>
+          <div className="text-xs">
+            listeners : <span className="text-xs text-purple-400">{ listeners }</span>
           </div>
-          <div className="text-sm">
-            play-count: <span className="text-lg">{ playCount }</span>
+          <div className="text-xs">
+            play-count: <span className="text-xs text-purple-400">{ playCount }</span>
           </div>
         </div>
       </div>
