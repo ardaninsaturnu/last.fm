@@ -13,6 +13,12 @@ This project created for Fazla Gıda company case.
 - Top artist's track list.
 - Storybook library
 
+## Planning To-do
+- infinite Scrool for main page
+- storybook component fixes for all components
+- test implementations
+- Redux toolkit for axios functions
+
 ## Tech
 
 used thoose techs for Booquery :
@@ -43,6 +49,9 @@ Install the dependencies and devDependencies and start the npm.
 npm install
 npm run dev
 ```
+
+for storybook you should run
+npm run storybook
 
 ## View
 
