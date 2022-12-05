@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import ArtistCard from "../components/ArtistCard";
 import Loading from "../components/Loading";
+import Link from "next/link";
 
 export default function Home() {
   const [ artistsData, setArtistsData ] = useState( null );
@@ -31,20 +32,20 @@ export default function Home() {
     )()
   },[]);
   
-  console.log( artistsData )
-  
   return (
       <div className="w-11/12 mx-auto flex flex-wrap gap-5 justify-center px-10">
         { artistsData?.artist.map( ( artist, index ) => {
           return loading ?
             <Loading/> :
-            <ArtistCard
-              key={index}
-              artistName={artist.name}
-              image={artist.image[2]['#text'] }
-              listeners={artist.listeners}
-              playCount={artist.playcount}
-            />;
+            <Link href={`/artist/${ artist.mbid }`}>
+              <ArtistCard
+                key={ index }
+                artistName={ artist.name }
+                image={ artist.image[2]['#text'] }
+                listeners= { artist.listeners }
+                playCount= { artist.playcount }
+              />
+            </Link>;
         }) }
       </div>
   )
