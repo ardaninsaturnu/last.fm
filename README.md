@@ -18,6 +18,7 @@ This project created for Fazla Gıda company case.
 - storybook component fixes for all components
 - test implementations
 - Redux toolkit for axios functions
+- Config file for api links and constant informations
 
 ## Tech
 
