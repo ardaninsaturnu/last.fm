@@ -36,16 +36,23 @@ export default function Home() {
       <div className="w-11/12 mx-auto flex flex-wrap gap-5 justify-center px-10">
         { artistsData?.artist.map( ( artist, index ) => {
           return loading ?
-            <Loading/> :
-            <Link href={`/artist/${ artist.mbid }`}>
-              <ArtistCard
-                key={ index }
-                artistName={ artist.name }
-                image={ artist.image[2]['#text'] }
-                listeners= { artist.listeners }
-                playCount= { artist.playcount }
-              />
-            </Link>;
+            <Loading/> : artist.mbid ?
+              <Link href={{
+                pathname : `/artist/${ artist.mbid }`,
+                query: {
+                  id: artist.mbid,
+                  name: artist.name
+                }
+              }}>
+                <ArtistCard
+                  key={ index }
+                  artistName={ artist.name }
+                  image={ artist.image[2]['#text'] }
+                  listeners= { artist.listeners }
+                  playCount= { artist.playcount }
+                />
+              </Link>
+              : ''
         }) }
       </div>
   )
