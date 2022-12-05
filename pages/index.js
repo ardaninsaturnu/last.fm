@@ -33,6 +33,8 @@ export default function Home() {
   },[]);
   
   return (
+    <>
+      <h1 className="text-center my-5 text-white text-5xl">Last Fm best artists list</h1>
       <div className="w-11/12 mx-auto flex flex-wrap gap-5 justify-center px-10">
         { artistsData?.artist.map( ( artist, index ) => {
           return loading ?
@@ -55,5 +57,6 @@ export default function Home() {
               : ''
         }) }
       </div>
+    </>
   )
 }
