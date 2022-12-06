@@ -1,6 +1,4 @@
 import {useRouter} from "next/router";
-import {useEffect} from "react";
-import axios from "axios";
 import ListCard from "../../components/ListCard";
 
 const Artist = () => {
