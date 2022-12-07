@@ -1,62 +1,62 @@
-import {useEffect, useState} from "react";
-import axios from "axios";
+import {useCallback, useEffect, useRef, useState} from "react";
 import ArtistCard from "../components/ArtistCard";
 import Loading from "../components/Loading";
 import Link from "next/link";
+import useFetch from "../hooks/useFetch";
 
 export default function Home() {
-  const [ artistsData, setArtistsData ] = useState( null );
-  const [ loading, setLoading ] = useState( false );
+  const [ limit, setLimit ] = useState( 0 );
+  const { loading, error, list } = useFetch( limit );
+  const [ lazy, setLazy ] = useState( loading )
+  const loader = useRef( null );
+  
+  const handleObserver = useCallback( (entries) => {
+    setLazy(true)
+    setLimit( prevState => prevState + 10 )
+    setLazy(false)
+  },[ ] )
   
   useEffect(() => {
-    (
-      async () => {
-        setLoading( true );
-        
-        try {
-          const res = await axios.get('http://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=b53230ab06865d451bea8e5aca7ea5e7&format=json');
-          
-          if( res.status !== 200 ) {
-            alert( res.statusText );
-            setLoading( false );
-          }
-          
-          const { artists } = res.data;
-          setArtistsData( artists );
-          setLoading( false );
-          
-        } catch (e) {
-          alert( e.message )
-        }
-      }
-    )()
-  },[]);
+    const option = {
+      root: null,
+      rootMargin: "20px",
+      threshold: 0
+    };
+  
+    const observer = new IntersectionObserver( handleObserver, option );
+    console.log(loader.current)
+    if ( loader.current ) observer.observe( loader.current );
+  }, [ handleObserver ]);
   
   return (
     <>
       <h1 className="text-center my-5 text-white text-5xl">Last Fm best artists list</h1>
       <div className="w-11/12 mx-auto flex flex-wrap gap-5 justify-center px-10">
-        { artistsData?.artist.map( ( artist, index ) => {
-          return loading ?
-            <Loading/> : artist.mbid ?
+        {  list?.artists?.artist?.map( ( artists, index ) => {
+            return(
+          loading ?
+            <Loading/> : artists.mbid ?
               <Link href={{
-                pathname : `/artist/${ artist.mbid }`,
+                pathname : `/artist/${ artists.mbid }`,
                 query: {
-                  id: artist.mbid,
-                  name: artist.name
+                  id: artists.mbid,
+                  name: artists.name
                 }
               }}>
                 <ArtistCard
                   key={ index }
-                  artistName={ artist.name }
-                  image={ artist.image[2]['#text'] }
-                  listeners= { artist.listeners }
-                  playCount= { artist.playcount }
+                  artistName={ artists.name }
+                  image={ artists.image[4]['#text'] }
+                  listeners= { artists.listeners }
+                  playCount= { artists.playcount }
                 />
               </Link>
               : ''
-        }) }
+        )
+        } )}
       </div>
+      { error && <p>Error!</p> }
+      <div ref={ loader } />
     </>
   )
-}
+};

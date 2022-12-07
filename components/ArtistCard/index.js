@@ -4,7 +4,7 @@ const ArtistCard = ({ listeners = 0, playCount = 0, image = 'https://static-medi
     <>
       <div
         className={`
-        flex
+        flex-col
         ${ theme === 'dark' ? 'text-purple-300' : theme === 'light' ? 'text-purple-700' : '' }
         border
         border-purple-500
@@ -14,7 +14,7 @@ const ArtistCard = ({ listeners = 0, playCount = 0, image = 'https://static-medi
         box-border
         p-3
         `}>
-        <div className="w-1/4 flex items-center">
+        <div className="w-full flex items-center">
           <img src={ image } alt='artist-card'/>
         </div>
         <div className="ml-5 flex-1">
