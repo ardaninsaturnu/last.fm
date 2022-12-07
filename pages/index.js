@@ -34,7 +34,7 @@ export default function Home() {
       <div className="w-11/12 mx-auto flex flex-wrap gap-5 justify-center px-10">
         {  list?.artists?.artist?.map( ( artists, index ) => {
             return(
-          loading ?
+          lazy ?
             <Loading/> : artists.mbid ?
               <Link href={{
                 pathname : `/artist/${ artists.mbid }`,
